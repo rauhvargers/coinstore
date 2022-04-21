@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoinsController;
 
+use App\Http\Controllers\ArtistsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,3 +21,6 @@ Route::get('/', function () {
 });
 
 Route::resource('coins', CoinsController::class);
+
+Route::get('/artists/', [ArtistsController::class, 'index']);
+Route::get('/artist/{slug}', [ArtistsController::class, 'show']);
