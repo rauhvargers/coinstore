@@ -25,5 +25,15 @@ class ArtistSeeder extends Seeder
                         interjeru izveidē, kur arī liek lietā savus hiperreālista dotumus.</p>";
         $artist->slug = "arvids_priedite";
         $artist->save();
+
+        $artist = new Artist([
+            'name' => 'Ilmārs Blumbergs',
+            'bio' => "<p>Ilmārs Blumbergs pieder pie māksliniekiem, kurus nekur nevar iekļaut –
+                        viņš vienmēr ir bijis un paliek viens un kā neviens. Būdams scenogrāfs vai grafiķis,
+                        gleznotājs vai zīmētājs, grāmatu ilustrētājs, tēlnieks, plakātists vai vēl nezin kas, –
+                        visu un jebko viņš savā mākslā skata sakarībās, pārvērtībās, negaidītu un neizmērojamu koordināšu krustojumos.</p>",
+            'slug' => 'ilmars_blumbergs'
+        ]);
+        $artist->save();
     }
 }

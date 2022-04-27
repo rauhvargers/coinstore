@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         (new ArtistSeeder())->run();
+        //$this->call([ArtistSeeder::class]); //probably should do this better
+
+        (new ProductSeeder())->run();
 
         // \App\Models\User::factory(10)->create();
     }

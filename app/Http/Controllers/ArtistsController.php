@@ -19,4 +19,5 @@ class ArtistsController extends Controller
         $artist = Artist::where('slug', $slug)->firstOrFail();
         return view("artist_view", ['artist' => $artist]);
     }
+
 }
