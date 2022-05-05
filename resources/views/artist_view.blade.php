@@ -17,11 +17,15 @@
         <h2>Coins by {{ $artist->name }}</h2>
         <ul>
             @foreach ($artist->products as $product)
-                <li>{{ $product->title }}</li>
+                <li>
+                    <x-coin-info :title="$product->title" :item="$product" class='useful' some-data-value='not useful'>
+                        <small>This is just not useful</small>
+                    </x-coin-info>
+                </li>
             @endforeach
         </ul>
     </section>
-    <a href='/artists/'>Back to list</a>
+    <a href='{{ url('artists') }}'>Back to list</a>
 </body>
 
 </html>
