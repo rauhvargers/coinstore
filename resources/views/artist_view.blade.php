@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Artist {{ $artist->name }}</title>
-</head>
+@section('title')
+ Artist {{ $artist->name }}
+@endsection
 
-<body>
-    <h1>{{ $artist->name }}</h1>
-    <section>
+
+@section('content')
+    <article class='m-5 p-5'>
+    <h1 class='text-lg font-bold mb-3'>{{ $artist->name }}</h1>
+    <section class=''>
         {!! $artist->bio !!}
     </section>
-    <section>
-        <h2>Coins by {{ $artist->name }}</h2>
-        <ul>
+    <section class=''>
+        <h2 class="text-lg mt-5 ">Coins by {{ $artist->name }} </h2>
+
+        <ul class="list-disc list-outside m-5 p-5 pt-0 mt-0">
             @foreach ($artist->products as $product)
                 <li>
                     <x-coin-info :title="$product->title" :item="$product" class='useful' some-data-value='not useful'>
-                        <small>This is just not useful</small>
+                        <p class='text-xs text-slate-600 mb-2'>{{ $product->description }}</p>
                     </x-coin-info>
                 </li>
             @endforeach
+
         </ul>
     </section>
-    <a href='{{ url('artists') }}'>Back to list</a>
-</body>
-
-</html>
+    </article>
+    <hr />
+    <a class='text-lime-500 p-5 m-5 flex' href='{{ url('artists') }}'>Back to list</a>
+@endsection

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoinsController;
-
 use App\Http\Controllers\ArtistsController;
 
 /*
@@ -20,7 +19,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('coins', CoinsController::class);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+require __DIR__.'/auth.php';
+
+//actual routes added in Web Technologies II
+Route::resource('coins', CoinsController::class);
 Route::get('/artists/', [ArtistsController::class, 'index']);
+
+//new item form and saving the item with "store"
+Route::get('/artist/create', [ArtistsController::class, 'create']);
+Route::post('/artist', [ArtistsController::class, 'store']);
+
 Route::get('/artist/{slug}', [ArtistsController::class, 'show']);
