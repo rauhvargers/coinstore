@@ -25,6 +25,10 @@
 
         </ul>
     </section>
+
+    <a href="/artist/{{ $artist->slug }}/edit">Edit artist information</a>
+
+
     </article>
     <hr />
     <a class='text-lime-500 p-5 m-5 flex' href='{{ url('artists') }}'>Back to list</a>

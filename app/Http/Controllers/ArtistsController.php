@@ -60,30 +60,37 @@ class ArtistsController extends Controller
         $artist->save();
 
         return redirect("/artists");
-
-        //dd($validated);
-        //return "nekā nebūs";
-
-        // $rules = array(
-        //     'name' => 'required|min:2|max:191',
-        //     'slug' => 'required|alpha_dash|min:3|max:191',
-        //     'description' => 'string|nullable');
-
-        //     $validated = $this->validate($request, $rules);
-
-
-
-        //
-
-
-        //     //dd($this);
-        //     //code...
-
-
-
-
-
-        //     dd($results);
-        // return "saglabāju!";
     }
+
+    //user wants to edit an artist.
+    //Find the artist item in DB and return a form for editing
+    public function edit(string $slug) {
+        $artist = Artist::where('slug', $slug)->firstOrFail();
+        return view("artist_edit", ['artist' => $artist]);
+    }
+
+    public function update(Request $request, string $slug){
+
+        $artist = Artist::where('slug', $slug)->firstOrFail();
+
+
+        $rules = array(
+            'name' => 'required|min:2|max:191',
+            'slug' => 'required|alpha_dash|min:3|max:191',
+            'description' => 'string|nullable'
+        );
+
+        $validated = $this->validate($request, $rules);
+        $artist->name = $validated["name"];
+        $artist->slug = $validated["slug"];
+        $artist->bio = $validated["description"];
+
+        $artist->save();
+
+        return redirect("/artists");
+
+
+    }
+
+
 }

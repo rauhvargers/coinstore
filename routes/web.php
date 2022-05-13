@@ -32,5 +32,7 @@ Route::get('/artists/', [ArtistsController::class, 'index']);
 //new item form and saving the item with "store"
 Route::get('/artist/create', [ArtistsController::class, 'create']);
 Route::post('/artist', [ArtistsController::class, 'store']);
+Route::get('/artist/{slug}/edit', [ArtistsController::class, 'edit']);
+Route::post('/artist/{slug}', [ArtistsController::class, 'update']);
 
 Route::get('/artist/{slug}', [ArtistsController::class, 'show']);
