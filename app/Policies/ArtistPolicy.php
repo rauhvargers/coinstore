@@ -43,6 +43,8 @@ class ArtistPolicy
     public function create(User $user)
     {
 
+
+
         //For demo purposes only: we allow creating new Artist(model) objects only to users with ID=1
         // that is, the first user in the database => myself, the tester ;)
         return ($user->id == 1)
@@ -59,7 +61,10 @@ class ArtistPolicy
      */
     public function update(User $user, Artist $artist)
     {
-        //
+        //admins may edit all items
+        return ($user->hasRole('admin'))
+        ? Response::allow()
+        : Response::deny("You have to become an admin if you want to edit items!");
     }
 
     /**

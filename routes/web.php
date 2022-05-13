@@ -19,9 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// USER DASHBOARD
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'user'])->name('dashboard');
+
+// ADMIN DASHBOARD
+Route::get('/admin_dashboard', function () {
+    return view('admin_dashboard');
+})->middleware(['auth', 'admin'])->name('admin_dashboard');
+
 
 require __DIR__.'/auth.php';
 

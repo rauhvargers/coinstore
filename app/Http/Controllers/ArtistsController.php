@@ -43,8 +43,8 @@ class ArtistsController extends Controller
         //so we call validation: is the current user allowed to perform "create" operation on Artist(model) objects?
         // Laravel searches for a policy on the Artist model and calls the ArtistPolicy->create authorization function.
         $this->authorize("create", Artist::class);
-        return view("artist_add");
 
+        return view("artist_add");
     }
 
 
@@ -76,16 +76,21 @@ class ArtistsController extends Controller
     //Find the artist item in DB and return a form for editing
     public function edit(string $slug)
     {
-        if (Auth::check()) {
-            $artist = Artist::where('slug', $slug)->firstOrFail();
-            return view("artist_edit", ['artist' => $artist]);
-        } else {
-            return "Not allowed here!";
-        }
+
+
+        $artist = Artist::where('slug', $slug)->firstOrFail();
+
+        //may the user edit this item?
+        $this->authorize("update", $artist, Artist::class);
+
+        return view("artist_edit", ['artist' => $artist]);
     }
 
     public function update(Request $request, string $slug)
     {
+        //may the user edit this item?
+        $this->authorize("update", Artist::class);
+
 
         $artist = Artist::where('slug', $slug)->firstOrFail();
 
