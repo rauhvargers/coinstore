@@ -39,13 +39,20 @@ class ArtistsController extends Controller
      */
     public function create()
     {
+        //the Artists controller is not strictly bound to the Artist model
+        //so we call validation: is the current user allowed to perform "create" operation on Artist(model) objects?
+        // Laravel searches for a policy on the Artist model and calls the ArtistPolicy->create authorization function.
+        $this->authorize("create", Artist::class);
         return view("artist_add");
+
     }
+
 
 
     public function store(Request $request)
     {
-        if (! Auth::check()) return "Not allowed!";
+        //simple check if the user is authorized at all, no policies applied
+        if (!Auth::check()) return "Not allowed!";
 
         $rules = array(
             'name' => 'required|min:2|max:191',
