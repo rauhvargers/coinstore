@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
-use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Client\Request as ClientRequest;
 
 class ArtistsController extends Controller
 {
@@ -44,7 +45,9 @@ class ArtistsController extends Controller
 
     public function store(Request $request)
     {
-                $rules = array(
+        if (! Auth::check()) return "Not allowed!";
+
+        $rules = array(
             'name' => 'required|min:2|max:191',
             'slug' => 'required|alpha_dash|min:3|max:191',
             'description' => 'string|nullable'
@@ -64,12 +67,18 @@ class ArtistsController extends Controller
 
     //user wants to edit an artist.
     //Find the artist item in DB and return a form for editing
-    public function edit(string $slug) {
-        $artist = Artist::where('slug', $slug)->firstOrFail();
-        return view("artist_edit", ['artist' => $artist]);
+    public function edit(string $slug)
+    {
+        if (Auth::check()) {
+            $artist = Artist::where('slug', $slug)->firstOrFail();
+            return view("artist_edit", ['artist' => $artist]);
+        } else {
+            return "Not allowed here!";
+        }
     }
 
-    public function update(Request $request, string $slug){
+    public function update(Request $request, string $slug)
+    {
 
         $artist = Artist::where('slug', $slug)->firstOrFail();
 
@@ -88,9 +97,5 @@ class ArtistsController extends Controller
         $artist->save();
 
         return redirect("/artists");
-
-
     }
-
-
 }

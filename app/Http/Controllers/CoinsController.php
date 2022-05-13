@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CoinsController extends Controller
 {
+
+    public function __construct()
+    {
+        //$this;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,6 +19,8 @@ class CoinsController extends Controller
      */
     public function index()
     {
+        dd(Auth::user());
+
         //
         return "Just a demo";
     }

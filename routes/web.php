@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 //actual routes added in Web Technologies II
-Route::resource('coins', CoinsController::class);
+Route::resource('coins', CoinsController::class)->middleware('auth');
 Route::get('/artists/', [ArtistsController::class, 'index']);
 
 //new item form and saving the item with "store"

@@ -26,7 +26,10 @@
         </ul>
     </section>
 
-    <a href="/artist/{{ $artist->slug }}/edit">Edit artist information</a>
+    @auth
+        <a href="/artist/{{ $artist->slug }}/edit">Edit artist information</a>
+    @endauth
+
 
 
     </article>
